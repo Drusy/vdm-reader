@@ -16,22 +16,22 @@ Then randomly, a viedemerde story is picked and written into an output file.
 In the [groovy package](https://github.com/danielpetisme/vdm-reader/tree/master/src/main/groovy/fr/isima/devweb/vdmreader/groovy), you will found the Groovy way to implement the
 application. It fits in a 101 lines long simple Groovy script (we could call it Groovy [101](http://en.wikipedia.org/wiki/101_(term)).
 Inside that script you can found a
-* *def* usage
-* *GString*s
-* *POGO* example
+* **def** usage
+* **GString**s
+* **POGO** example
 * list, map usage
 * XML Parsing
-* Groovy operators like _*._
+* Groovy operators like *.
 * Operator overloading (+= on a map)
-* closures (used with _findAll_ or _inject_
-* Duck Typing (*as* usage)
+* closures (used with **findAll** or **inject**
+* Duck Typing (**as** usage)
 * Anonymous class substitute
 * File handling
 * etc
 
 ## Java
 In the [java package](https://github.com/danielpetisme/vdm-reader/tree/master/src/main/java/fr/isima/devweb/vdmreader/java), you will found the Java way to also implement the application
-but in a classic Java way. *It's a quick & dirty implementation!!*. I tried as much as possible to keep the same organization as the Groovy script (variables & methods name).
+but in a classic Java way. **It's a quick & dirty implementation!!**. I tried as much as possible to keep the same organization as the Groovy script (variables & methods name).
 
 ## Test
 In the [groovy test package](https://github.com/danielpetisme/vdm-reader/tree/master/src/test/groovy/fr/isima/devweb/vdmreader/groovy/test), you will found an example of [Spock](http://code.google.com/p/spock/), an excellent test/specification framework.
@@ -52,18 +52,18 @@ This the console output of the Groovy version:
 > Infos: Polling VDM
 > déc. 21, 2012 9:32:23 PM java_util_logging_Logger$log call
 > Infos: Randoming a VDM
-> ----------
+> \----------
 >   20-12-2012 10:00
 >   Aujourd'hui, première lessive commune avec ma copine. Mes vêtements sont désormais tous incrustés de strass et de paillettes. Mes collègues m'appellent "la danseuse". VDM
 >           ANONYME
-> ----------
+> \----------
 
 and the generated output file:
-> ----------
+> \----------
 >   20-12-2012 10:00
 >   Aujourd'hui, première lessive commune avec ma copine. Mes vêtements sont désormais tous incrustés de strass et de paillettes. Mes collègues m'appellent "la danseuse". VDM
 >           ANONYME
-> ----------
+> \----------
 
 # Disclaimer
 This project aims to present some Groovy usage a tricks. **I did not try to do the perfect Groovy/Java code**. I guess (and I'm sure) there are plenty of other way to achieve the application goal (with some well-known libraries)
