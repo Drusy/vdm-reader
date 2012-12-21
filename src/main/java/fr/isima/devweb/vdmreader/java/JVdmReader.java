@@ -30,6 +30,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.*;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -108,6 +109,7 @@ public class JVdmReader {
       };
 
       Runnable prompterRunner = new Runnable() {
+         private BufferedWriter out = new BufferedWriter(new FileWriter(output));
          @Override
          public void run() {
             LOGGER.log(Level.INFO, "Randoming a VDM");
@@ -128,13 +130,14 @@ public class JVdmReader {
 
             System.out.println(outputBuilder.toString());
             try {
-               FileWriter outputStream = new FileWriter(output);
-               outputStream.append(outputBuilder.toString());
+               out.append(outputBuilder.toString());
+               out.flush();
             } catch (IOException e) {
                LOGGER.log(Level.SEVERE, e.getMessage());
             }
 
          }
+
       };
 
 
