@@ -39,7 +39,7 @@ The framework embeds a powerful DSL with match my favorite testing approach (*gi
 
 # Results
 This the console output of the Groovy version:
-[vdm-reader console ouput screenshot](http://s14.postimage.org/ew5fm96vl/vdm_reader_screenshot_001.png)
+![vdm-reader console ouput screenshot](http://s14.postimage.org/ew5fm96vl/vdm_reader_screenshot_001.png)
 
 # Disclaimer
 This project aims to present some Groovy usage a tricks. **I did not try to do the perfect Groovy/Java code**. I guess (and I'm sure) there are plenty of other way to achieve the application goal (with some well-known libraries)
