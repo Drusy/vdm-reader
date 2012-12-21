@@ -83,14 +83,15 @@ def randomVDM = {
     //Here I ask to get the key property for every entry present in the VDM map
     def key = VDMS*.key[new Random().nextInt(VDMS.size() + 1)]
     def vdm = VDMS[key]
-
-    //Writting in the output file
-    output << """----------
+    def text = """----------
   ${vdm.date}
   ${vdm.content}
           ${vdm.author}
 ----------
 """
+    println text
+    //Writting in the output file
+    output << text
 }
 
 //Creating a thread which will invoke the poller immediately and then every 5 seconds
