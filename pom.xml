@@ -8,57 +8,89 @@
     <artifactId>vdmreader</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.codehaus.gmaven.runtime</groupId>
-            <artifactId>gmaven-runtime-2.0</artifactId>
-            <version>1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 
     <build>
+        <!-- Mandatory plugins for using Spock -->
         <plugins>
             <plugin>
                 <groupId>org.codehaus.gmaven</groupId>
                 <artifactId>gmaven-plugin</artifactId>
+                <version>1.4</version>
+                <configuration>
+                    <providerSelection>2.0</providerSelection>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>generateStubs</goal>
                             <goal>compile</goal>
-                            <goal>generateTestStubs</goal>
                             <goal>testCompile</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.gmaven</groupId>
-                <artifactId>gmaven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <fileset>
-                                    <directory>${pom.basedir}/src/main/script</directory>
-                                    <includes>
-                                        <include>**/*.groovy</include>
-                                    </includes>
-                                </fileset>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.gmaven.runtime</groupId>
+                        <artifactId>gmaven-runtime-2.0</artifactId>
+                        <version>1.4</version>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>org.codehaus.groovy</groupId>
+                                <artifactId>groovy-all</artifactId>
+                            </exclusion>
+                        </exclusions>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
+                        <version>2.0.5</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>2.0.5</version>
+        </dependency>
+        <!-- Mandatory dependencies for using Spock -->
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+            <version>1.0-groovy-2.0-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency> <!-- only necessary if Hamcrest matchers are used -->
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <!-- Only required if a snapshot version of Spock is used -->
+        <repository>
+            <id>spock-snapshots</id>
+            <url>http://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <!-- Only required if a snapshot version of Spock's Maven plugin is used -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spock-snapshots</id>
+            <url>http://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+
 </project>
