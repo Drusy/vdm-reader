@@ -119,14 +119,14 @@ public class JVdmReader {
             Vdm vdm = VDMS.get(key);
 
             StringBuilder outputBuilder = new StringBuilder("");
-            outputBuilder.append("----------\n");
+            outputBuilder.append("--\n");
             outputBuilder.append("  ");
             outputBuilder.append(vdm.getDate());
             outputBuilder.append("\n  ");
             outputBuilder.append(vdm.getContent());
             outputBuilder.append("\n          ");
             outputBuilder.append(vdm.getAuthor());
-            outputBuilder.append("\n----------\n");
+            outputBuilder.append("\n--\n");
 
             System.out.println(outputBuilder.toString());
             try {
