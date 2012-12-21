@@ -40,7 +40,30 @@ The framework embeds a powerful DSL with match my favorite testing approach (*gi
 
 # Results
 This the console output of the Groovy version:
->
+>déc. 21, 2012 9:32:13 PM java_util_logging_Logger$log call
+> Infos: Polling VDM
+> déc. 21, 2012 9:32:13 PM org.codehaus.groovy.runtime.callsite.PojoMetaMethodSite$PojoCachedMethodSiteNoUnwrap invoke
+> Infos: Grand Total of VDMs: 35
+> déc. 21, 2012 9:32:18 PM java_util_logging_Logger$log call
+> Infos: Polling VDM
+> déc. 21, 2012 9:32:18 PM org.codehaus.groovy.runtime.callsite.PojoMetaMethodSite$PojoCachedMethodSiteNoUnwrap invoke
+> Infos: Grand Total of VDMs: 35
+> déc. 21, 2012 9:32:23 PM java_util_logging_Logger$log call
+> Infos: Polling VDM
+> déc. 21, 2012 9:32:23 PM java_util_logging_Logger$log call
+> Infos: Randoming a VDM
+> ----------
+>   20-12-2012 10:00
+>   Aujourd'hui, première lessive commune avec ma copine. Mes vêtements sont désormais tous incrustés de strass et de paillettes. Mes collègues m'appellent "la danseuse". VDM
+>           ANONYME
+> ----------
+
+and the generated output file:
+> ----------
+>   20-12-2012 10:00
+>   Aujourd'hui, première lessive commune avec ma copine. Mes vêtements sont désormais tous incrustés de strass et de paillettes. Mes collègues m'appellent "la danseuse". VDM
+>           ANONYME
+> ----------
 
 # Disclaimer
 This project aims to present some Groovy usage a tricks. **I did not try to do the perfect Groovy/Java code**. I guess (and I'm sure) there are plenty of other way to achieve the application goal (with some well-known libraries)

@@ -28,25 +28,25 @@ import java.text.SimpleDateFormat
 import java.util.concurrent.Executors
 import java.util.logging.*
 import static java.util.concurrent.TimeUnit.SECONDS
-
 /**
  * @author Daniel Petisme
  * @version 1.0
  */
 def LOGGER = Logger.getLogger("GVdmReader")
-
 //Global Map
 def VDMS = [:]
 //The output file
-def output = new File("vdm.out")
+def out = new File("vdm.out")
 
 //POGO
 class Vdm {
-    def date
-    def author
-    def content
+    String date
+    String author
+    String content
 
-    def getAuthor() { author.toUpperCase() }
+    def getAuthor() {
+        author.toUpperCase()
+    }
 }
 
 //Convenient method to format the VDM date (NB: Added as a static method of the class java.util.Date)
@@ -55,7 +55,7 @@ Date.metaClass.static.formatVDMDate = {
 }
 
 //Compute a key based on the date formated + the author name
-NodeChild.metaClass.key = { "${Date.formatVDMDate(delegate.updated)}-${delegate.author.toUpperCase()}" }
+NodeChild.metaClass.key = {"${Date.formatVDMDate(delegate.updated)}-${delegate.author}"}
 
 //A classic Runnable to do the polling in a seperate Thread
 def pollerRunner = new Runnable() {
@@ -91,12 +91,11 @@ def randomVDM = {
 """
     println text
     //Writting in the output file
-    output << text
+    out << text
 }
 
 //Creating a thread which will invoke the poller immediately and then every 5 seconds
 Executors.newScheduledThreadPool(1).scheduleAtFixedRate(pollerRunner, 0, 5, SECONDS)
-
 //A map + Duck typing can be a convenient way to replay an anaonymous class :)
 def prompterRunner = [run: randomVDM] as Runnable
 Executors.newScheduledThreadPool(1).scheduleAtFixedRate(prompterRunner, 10, 10, SECONDS)
