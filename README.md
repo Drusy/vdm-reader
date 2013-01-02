@@ -1,5 +1,6 @@
 vdm-reader
 ==========
+[![Build Status](https://buildhive.cloudbees.com/job/danielpetisme/job/vdm-reader/badge/icon)](https://buildhive.cloudbees.com/job/danielpetisme/job/vdm-reader/)
 
 A sample Groovy script for ISIMA students (http://www.isima.fr)
 
