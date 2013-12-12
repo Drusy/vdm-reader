@@ -49,13 +49,8 @@ class Vdm {
     }
 }
 
-//Convenient method to format the VDM date (NB: Added as a static method of the class java.util.Date)
-Date.metaClass.static.formatVDMDate = {
-    new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH).parse(it as String).format("dd-MM-YYY HH:mm")
-}
-
 //Compute a key based on the date formated + the author name
-NodeChild.metaClass.key = {"${Date.formatVDMDate(delegate.updated)}-${delegate.author}"}
+NodeChild.metaClass.key = {"${delegate.id}"}
 
 //A classic Runnable to do the polling in a seperate Thread
 def pollerRunner = new Runnable() {
@@ -65,15 +60,16 @@ def pollerRunner = new Runnable() {
         //Keep only the new ones
         //compute the map [key:Vdm] of all the new stories
         //Add this map to the exiting VDM list
-        VDMS += new XmlSlurper().parse("http://feeds.uri.lv/viedemerde").entry.findAll {
+        VDMS += new XmlSlurper().parse("http://feedpress.me/viedemerde").entry.findAll {
             !VDMS[it.key()]
         }.inject([:]) { map, entry ->
             // I use duck typing instead of using explicitly the "new" operator
             //Duck typing use the "as" keyword : myVar as aType
-            map."${entry.key()}" = [date: Date.formatVDMDate(entry.updated), author: entry.author, content: entry.content] as Vdm
-            map
+            map."${entry.key()}" = [date: entry.updated, author: entry.author, content: entry.content] as Vdm
+
+            return map
         }
-        LOGGER.log(Level.INFO, "Grand Total of VDMs: ${VDMS.size()}")
+        LOGGER.log(Level.INFO, "Total of VDMs: ${VDMS.size()}")
     }
 };
 
@@ -85,7 +81,7 @@ def randomVDM = {
     def vdm = VDMS[key]
     def text = """--
   ${vdm.date}
-  ${vdm.content}
+  ${vdm.content[3..-5]}
           ${vdm.author}
 --
 """
@@ -95,7 +91,7 @@ def randomVDM = {
 }
 
 //Creating a thread which will invoke the poller immediately and then every 5 seconds
-Executors.newScheduledThreadPool(1).scheduleAtFixedRate(pollerRunner, 0, 5, SECONDS)
+Executors.newScheduledThreadPool(1).scheduleAtFixedRate(pollerRunner, 0, 30, SECONDS)
 //A map + Duck typing can be a convenient way to replay an anaonymous class :)
 def prompterRunner = [run: randomVDM] as Runnable
-Executors.newScheduledThreadPool(1).scheduleAtFixedRate(prompterRunner, 10, 10, SECONDS)
+Executors.newScheduledThreadPool(1).scheduleAtFixedRate(prompterRunner, 2, 5, SECONDS)
